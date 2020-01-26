@@ -1,5 +1,9 @@
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import reducer from './rootReducer';
+
+import thunk from 'redux-thunk';
+import logger from 'redux-logger';
+import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
 
 /**
  * @param {object} initialState
@@ -10,5 +14,5 @@ import reducer from './rootReducer';
  * @param {string} options.storeKey This key will be used to preserve store in global namespace for safe HMR
  */
 export const makeStore = (initialState, options) => {
-	return createStore(reducer, initialState);
+	return createStore(reducer, initialState, composeWithDevTools(applyMiddleware(thunk, logger)));
 };
