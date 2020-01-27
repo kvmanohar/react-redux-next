@@ -1,13 +1,13 @@
-import * as types from './types';
+import { SET_FOO } from '../types';
 
 const initState = {
-	foo: ''
+	foo: null
 };
 
 const reducer = (state = initState, action) => {
 	switch (action.type) {
-		case types.SET_FOO:
-			return { ...state, foo: action.payload };
+		case SET_FOO:
+			return Object.assign({}, state, { foo: action.payload });
 
 		default:
 			return state;

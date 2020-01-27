@@ -1,12 +1,10 @@
-import * as types from './types';
+import { SET_BAR } from '../types';
 
-const initState = {
-	bar: ''
-};
+const initState = {};
 
 const reducer = (state = initState, action) => {
 	switch (action.type) {
-		case types.SET_BAR:
+		case SET_BAR:
 			return { ...state, bar: action.payload };
 
 		default:

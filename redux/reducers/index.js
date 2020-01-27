@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
 
 //Import all reducers
-import fooReducer from './foo/reducer';
-import barReducer from './bar/reducer';
+import fooReducer from './fooReducer';
+import barReducer from './barReducer';
 
 const rootReducer = combineReducers({
 	foo: fooReducer,

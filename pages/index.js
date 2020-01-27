@@ -1,22 +1,23 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fooActions } from '../redux/foo';
+import actions from '../redux/actions';
 
-class Index extends Component {
-	static getInitialProps({ store, isServer, pathname, query }) {
-		// component will be able to read from store's state when rendered
-		store.dispatch(fooActions.setFoo(' : Test-Foo - Index'));
-		// you can pass some custom props to component from here
-		return { custom: 'custom' };
-	}
-	render() {
-		return (
-			<div>
-				<div>Prop from Redux - {JSON.stringify(this.props.foo)}</div>
-				<div>Prop from Redux - {JSON.stringify(this.props.bar)}</div>
-				<div>Prop from getInitialProps {this.props.custom}</div>
-			</div>
-		);
-	}
-}
-export default connect((state) => state)(Index);
+const Index = (props) => {
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		props.getPosts();
+	};
+	return (
+		<div>
+			<div>Prop from Redux {JSON.stringify(props)}</div>
+			<button onClick={handleSubmit}>Load Posts</button>
+			<div>Props from getInitialProps - {props.custom}</div>
+		</div>
+	);
+};
+
+Index.getInitialProps = async ({ store, isServer, pathname, query }) => {
+	await store.dispatch(actions.getPosts());
+	return { custom: 'Custom props' };
+};
+export default connect((state) => state, actions)(Index);
